@@ -1,4 +1,4 @@
-import { Link, useLocation, useSearchParams } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import { useGetCharacter } from "../../hooks/useGetCharacter";
 import {
   Breadcrumb,
@@ -18,9 +18,9 @@ import { FaLocationDot } from "react-icons/fa6";
 import { useGetEpisodes } from "../../hooks/useGetEpisodes";
 
 export const Profile: React.FC = () => {
-  const [searchParams] = useSearchParams();
+  const { id } = useParams<{ id: string }>();
   const location = useLocation();
-  const { data, isLoading, error } = useGetCharacter(+!searchParams.get("id"));
+  const { data, isLoading, error } = useGetCharacter(id ? +id : 1);
   /*  const { data: episodes, isLoading: isEpisodesLoading } = useGetEpisodes(
     data?.episode.map((url: string) => +url.split("episode/")[1]),
     

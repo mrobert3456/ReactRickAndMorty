@@ -15,5 +15,5 @@ export const getAllCharacters = (
 };
 
 export const getOneCharacter = (id: number) => {
-  return axios.get(`https://rickandmortyapi.com/api/character/${id}`, {});
+  return axios.get(`https://rickandmortyapi.com/api/character/${id}`);
 };
