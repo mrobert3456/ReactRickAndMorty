@@ -1,8 +1,15 @@
 import axios from "axios";
 import { Pagination } from "../_components/datatable/table";
+import { CharacterListFilterProps } from "../hooks/useCharachtersFilter";
 
-export const getAllCharacters = (pagination: Pagination) => {
-  return axios.get(
-    `https://rickandmortyapi.com/api/character/?page=${pagination.page}`
-  );
+export const getAllCharacters = (
+  pagination: Pagination,
+  filter: CharacterListFilterProps
+) => {
+  return axios.get(`https://rickandmortyapi.com/api/character/`, {
+    params: {
+      page: pagination.page,
+      ...filter,
+    },
+  });
 };
