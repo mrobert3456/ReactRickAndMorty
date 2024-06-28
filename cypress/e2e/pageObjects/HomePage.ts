@@ -8,7 +8,7 @@ class HomePage {
   }
 
   getCustomRowName(rowId: number) {
-    return cy.get(`#row_${rowId}_name`);
+    return cy.get(`#row${rowId}-cell_1_name`);
   }
 }
 
