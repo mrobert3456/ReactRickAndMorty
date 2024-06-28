@@ -1,4 +1,4 @@
-import { useLocation, useSearchParams } from "react-router-dom";
+import { Link, useLocation, useSearchParams } from "react-router-dom";
 import { useGetCharacter } from "../../hooks/useGetCharacter";
 import {
   Breadcrumb,
@@ -12,6 +12,7 @@ import {
   Text,
   UnorderedList,
   ListItem,
+  Button,
 } from "@chakra-ui/react";
 import { FaLocationDot } from "react-icons/fa6";
 import { useGetEpisodes } from "../../hooks/useGetEpisodes";
@@ -27,20 +28,25 @@ export const Profile: React.FC = () => {
 
   return (
     <Flex flexDir="column" gap={2}>
-      <Breadcrumb>
-        <BreadcrumbItem key={`breadcrumb__home`}>
-          <BreadcrumbLink href={`/`}>Home</BreadcrumbLink>
-        </BreadcrumbItem>
-        {location.pathname.split("/").map((item: string) => {
-          if (item !== "") {
-            return (
-              <BreadcrumbItem isCurrentPage key={`breadcrumb__${item}`}>
-                <BreadcrumbLink href={`/${item}`}>{item}</BreadcrumbLink>
-              </BreadcrumbItem>
-            );
-          }
-        })}
-      </Breadcrumb>
+      <Flex justifyContent="space-between">
+        <Breadcrumb>
+          <BreadcrumbItem key={`breadcrumb__home`}>
+            <BreadcrumbLink href={`/`}>Home</BreadcrumbLink>
+          </BreadcrumbItem>
+          {location.pathname.split("/").map((item: string) => {
+            if (item !== "") {
+              return (
+                <BreadcrumbItem isCurrentPage key={`breadcrumb__${item}`}>
+                  <BreadcrumbLink href={`/${item}`}>{item}</BreadcrumbLink>
+                </BreadcrumbItem>
+              );
+            }
+          })}
+        </Breadcrumb>
+        <Button id="back_navigation__button" as={Link} to="/">
+          Back to Home page
+        </Button>
+      </Flex>
       <SimpleGrid
         templateAreas={{
           base: `"image" "info"`,
