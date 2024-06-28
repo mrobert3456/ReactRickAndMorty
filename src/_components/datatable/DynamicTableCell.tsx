@@ -10,7 +10,11 @@ const DynamicTableCell = <T extends { id?: number }>({
   row,
   header,
 }: DynamicTableCellProps<T>) => {
-  return <Td key={`${row.id}_${header.key}`}>{header.render(row)}</Td>;
+  return (
+    <Td id={`row_${row.id}_${header.key}`} key={`${row.id}_${header.key}`}>
+      {header.render(row)}
+    </Td>
+  );
 };
 
 export default DynamicTableCell;

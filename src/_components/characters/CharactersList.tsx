@@ -14,19 +14,18 @@ const CharactersList: React.FC = () => {
     characterFilterDispatch({ type: "SET_NAME", payload: event.target.value });
   };
   return (
-    <div className="App">
-      <DataTable<Character>
-        headers={Headers}
-        list={data?.list || []}
-        isLoading={isLoading}
-        filterRows={(e) => filterNames(e)}
-        isFetching={isFetching}
-        pagination={{
-          ...pagination,
-          totalItems: data?.info.count || 0,
-        }}
-      />
-    </div>
+    <DataTable<Character>
+      id="charachters_table"
+      headers={Headers}
+      list={data?.list || []}
+      isLoading={isLoading}
+      filterRows={(e) => filterNames(e)}
+      isFetching={isFetching}
+      pagination={{
+        ...pagination,
+        totalItems: data?.info.count || 0,
+      }}
+    />
   );
 };
 

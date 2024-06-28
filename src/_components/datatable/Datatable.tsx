@@ -24,6 +24,7 @@ interface DataTableProps<T> {
   isFetching?: boolean;
   pagination?: PaginationProps;
   searchText?: string;
+  id?: string;
   filterRows?: React.ChangeEventHandler<HTMLInputElement>;
 }
 
@@ -35,13 +36,14 @@ const DataTable = <T extends { id?: number }>({
   isFetching,
   pagination,
   searchText,
+  id,
   filterRows,
 }: PropsWithChildren<DataTableProps<T>>) => {
   if (isLoading) return <DataTableSkeleton />;
 
   const renderRow = (row: T, headers: Header<T>[], index: number) => {
     return (
-      <Tr key={`row-${row.id}`}>
+      <Tr id={`row-${row.id}`} key={`row-${row.id}`}>
         {headers.map((header: Header<T>) => (
           <DynamicTableCell header={header} row={row} />
         ))}
@@ -50,11 +52,16 @@ const DataTable = <T extends { id?: number }>({
   };
 
   return (
-    <Box>
+    <Box id={id}>
       <Box id="table__toolbar">
         <Flex justifyContent="flex-end">
           {filterRows && (
-            <Search onChange={filterRows} value={searchText} size="lg" />
+            <Search
+              id="table_toolbar__searchbar"
+              onChange={filterRows}
+              value={searchText}
+              size="lg"
+            />
           )}
           {isFetching && <Spinner />}
         </Flex>

@@ -25,13 +25,25 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 //
-// declare global {
-//   namespace Cypress {
-//     interface Chainable {
-//       login(email: string, password: string): Chainable<void>
-//       drag(subject: string, options?: Partial<TypeOptions>): Chainable<Element>
-//       dismiss(subject: string, options?: Partial<TypeOptions>): Chainable<Element>
-//       visit(originalFn: CommandOriginalFn, url: string, options: Partial<VisitOptions>): Chainable<Element>
-//     }
-//   }
-// }
+
+declare namespace Cypress {
+  interface Chainable {
+    interceptGetAllCharacters(CharactersData, page, name): Chainable<void>;
+  }
+}
+
+Cypress.Commands.add(
+  "interceptGetAllCharacters",
+  (CharactersData, page, name) => {
+    cy.intercept(
+      {
+        method: "GET",
+        url: `https://rickandmortyapi.com/api/character/?page=${page}&name=${name}`,
+      },
+      {
+        statusCode: 200,
+        body: CharactersData,
+      }
+    ).as("all_characters");
+  }
+);
