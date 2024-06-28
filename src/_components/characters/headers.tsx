@@ -9,7 +9,7 @@ export const Headers: Header<Character>[] = [
       <Image
         src={item.image}
         alt={`${item.name}__image`}
-        boxSize="100px"
+        boxSize="50px"
         objectFit="cover"
       />
     ),
