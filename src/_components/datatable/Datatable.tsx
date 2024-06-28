@@ -14,6 +14,7 @@ import {
 import DynamicTableCell from "./DynamicTableCell";
 import DataTableSkeleton from "./DatatableSkeleton";
 import Search from "../Search/Search";
+import Pagination from "./Pagination";
 
 interface DataTableProps<T> {
   headers: Header<T>[];
@@ -84,7 +85,9 @@ const DataTable = <T extends { id?: number }>({
         </Tbody>
       </Table>
 
-      {pagination && <Box></Box>}
+      {pagination && (
+        <Pagination id="table_pagination" pagination={pagination} />
+      )}
     </Box>
   );
 };
