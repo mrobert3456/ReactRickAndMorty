@@ -11,7 +11,6 @@ import {
   Thead,
   Tr,
 } from "@chakra-ui/react";
-import DynamicTableCell from "./DynamicTableCell";
 import DataTableSkeleton from "./DatatableSkeleton";
 import Search from "../Search/Search";
 import Pagination from "./Pagination";
@@ -43,9 +42,14 @@ const DataTable = <T extends { id?: number }>({
 
   const renderRow = (row: T, headers: Header<T>[], index: number) => {
     return (
-      <Tr id={`row-${row.id}`} key={`row-${row.id}`}>
-        {headers.map((header: Header<T>) => (
-          <DynamicTableCell header={header} row={row} />
+      <Tr id={`row__${row.id}`} key={`row__${row.id}`}>
+        {headers.map((header: Header<T>, index: number) => (
+          <Td
+            id={`row${row.id}-cell_${index}_${header.key}`}
+            key={`row${row.id}-cell_${index}_${header.key}`}
+          >
+            {header.render(row)}
+          </Td>
         ))}
       </Tr>
     );
@@ -66,8 +70,8 @@ const DataTable = <T extends { id?: number }>({
           {isFetching && <Spinner />}
         </Flex>
       </Box>
-      <Table w="100%" variant="striped">
-        <Thead pos="sticky">
+      <Table id="table" w="100%" variant="striped">
+        <Thead pos="sticky" id="table__header">
           <Tr h="3rem">
             {headers.map((header: Header<T>) => (
               <Th key={header.key} px="2.5rem" py="0.125rem">
@@ -79,12 +83,16 @@ const DataTable = <T extends { id?: number }>({
           </Tr>
         </Thead>
 
-        <Tbody>
+        <Tbody id="table__body">
           {list.length > 0 ? (
             list.map((row: T, index: number) => renderRow(row, headers, index))
           ) : (
-            <Tr>
-              <Td colSpan={headers.length}>
+            <Tr id="row-no-data" key="row-no-data">
+              <Td
+                id="row-cell-no-data"
+                key={"row-cell-no-data"}
+                colSpan={headers.length}
+              >
                 <Box>Query returned no results</Box>
               </Td>
             </Tr>

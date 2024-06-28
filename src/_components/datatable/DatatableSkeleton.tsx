@@ -27,9 +27,13 @@ const DataTableSkeleton: React.FC = () => {
 
       <Table w="100%" variant="striped">
         <Thead pos="sticky">
-          <Tr h="3rem">
+          <Tr key={`skeleton-header__row`} h="3rem">
             {[1, 2, 3, 4, 5].map((index: number) => (
-              <Th key={`row__${index}`} px="2.5rem" py="0.125rem">
+              <Th
+                key={`skeleton-header_cell__${index}`}
+                px="2.5rem"
+                py="0.125rem"
+              >
                 <Flex justifyContent="space-between" w="100%">
                   <Skeleton id={`skeleton-row-${index}`} h="20px" w="4rem" />
                 </Flex>
@@ -40,11 +44,15 @@ const DataTableSkeleton: React.FC = () => {
 
         <Tbody>
           {[1, 2, 3, 4, 5].map((index: number) => (
-            <Tr h="3rem">
+            <Tr
+              id={`skeleton-row__${index}`}
+              key={`skeleton_row__${index}`}
+              h="3rem"
+            >
               {[1, 2, 3, 4, 5].map((index: number) => (
                 <Td
-                  key={`skeleton-cell-${index}`}
-                  id={`skeleton-cell-${index}`}
+                  key={`skeleton-row_cell__${index}`}
+                  id={`skeleton-row_cell__${index}`}
                   px="2.5rem"
                   py="0.125rem"
                 >
