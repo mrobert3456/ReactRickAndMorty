@@ -13,6 +13,7 @@ import {
 } from "@chakra-ui/react";
 import DynamicTableCell from "./DynamicTableCell";
 import DataTableSkeleton from "./DatatableSkeleton";
+import Search from "../Search/Search";
 
 interface DataTableProps<T> {
   headers: Header<T>[];
@@ -21,6 +22,7 @@ interface DataTableProps<T> {
   isLoading?: boolean;
   isFetching?: boolean;
   pagination?: PaginationProps;
+  searchText?: string;
   filterRows?: React.ChangeEventHandler<HTMLInputElement>;
 }
 
@@ -31,6 +33,7 @@ const DataTable = <T extends { id?: number }>({
   isLoading,
   isFetching,
   pagination,
+  searchText,
   filterRows,
 }: PropsWithChildren<DataTableProps<T>>) => {
   if (isLoading) return <DataTableSkeleton />;
@@ -49,7 +52,9 @@ const DataTable = <T extends { id?: number }>({
     <Box>
       <Box id="table__toolbar">
         <Flex justifyContent="flex-end">
-          {filterRows && <div></div>}
+          {filterRows && (
+            <Search onChange={filterRows} value={searchText} size="lg" />
+          )}
           {isFetching && <Spinner />}
         </Flex>
       </Box>
