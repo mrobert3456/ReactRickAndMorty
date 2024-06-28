@@ -14,11 +14,12 @@ import {
 import DataTableSkeleton from "./DatatableSkeleton";
 import Search from "../Search/Search";
 import Pagination from "./Pagination";
+import { AxiosError } from "axios";
 
 interface DataTableProps<T> {
   headers: Header<T>[];
   list: T[];
-  error?: Error;
+  error?: AxiosError | null;
   isLoading?: boolean;
   isFetching?: boolean;
   pagination?: PaginationProps;
@@ -84,7 +85,7 @@ const DataTable = <T extends { id?: number }>({
         </Thead>
 
         <Tbody id="table__body">
-          {list.length > 0 ? (
+          {list.length > 0 && !error ? (
             list.map((row: T, index: number) => renderRow(row, headers, index))
           ) : (
             <Tr id="row-no-data" key="row-no-data">

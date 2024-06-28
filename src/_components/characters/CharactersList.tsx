@@ -8,11 +8,15 @@ import { Headers } from "./headers";
 const CharactersList: React.FC = () => {
   const pagination = usePagination();
   const [filter, characterFilterDispatch] = useCharactersFilter();
-  const { data, isLoading, isFetching } = useGetCharacters(pagination, filter);
+  const { data, isLoading, isFetching, error } = useGetCharacters(
+    pagination,
+    filter
+  );
 
   const filterNames: React.ChangeEventHandler<HTMLInputElement> = (event) => {
     characterFilterDispatch({ type: "SET_NAME", payload: event.target.value });
   };
+
   return (
     <DataTable<Character>
       id="charachters_table"
@@ -25,6 +29,7 @@ const CharactersList: React.FC = () => {
         ...pagination,
         totalItems: data?.info.count || 0,
       }}
+      error={error}
     />
   );
 };

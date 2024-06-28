@@ -1,4 +1,4 @@
-import { Box, Divider, Stack } from "@chakra-ui/react";
+import { Box, Stack } from "@chakra-ui/react";
 import { Outlet } from "react-router-dom";
 import Header from "./Header";
 
