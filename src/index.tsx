@@ -4,15 +4,22 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { ChakraProvider } from "@chakra-ui/react";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
+
+const client = new QueryClient();
 root.render(
   <React.StrictMode>
-    <ChakraProvider>
-      <App />
-    </ChakraProvider>
+    <QueryClientProvider client={client}>
+      <ReactQueryDevtools initialIsOpen={false} />
+      <ChakraProvider>
+        <App />
+      </ChakraProvider>
+    </QueryClientProvider>
   </React.StrictMode>
 );
 
