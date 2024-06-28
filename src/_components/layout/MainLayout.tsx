@@ -1,16 +1,16 @@
-import { Box, Divider } from "@chakra-ui/react";
+import { Box, Divider, Stack } from "@chakra-ui/react";
 import { Outlet } from "react-router-dom";
 import Header from "./Header";
 
 const MainLayout: React.FC = () => {
   return (
-    <Box>
+    <Stack h="100vh">
       <Header />
-      <Divider />
-      <Box as="main" p="2rem">
+
+      <Box as="main" px="2rem" py={"4rem"} h="100%">
         <Outlet />
       </Box>
-    </Box>
+    </Stack>
   );
 };
 export default MainLayout;
