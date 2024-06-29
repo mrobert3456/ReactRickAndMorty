@@ -41,7 +41,9 @@ const Pagination: React.FC<Props> = ({ id, pagination }) => {
           id="next_page__button"
           icon={<MdKeyboardDoubleArrowRight />}
           aria-label="Next page"
-          isDisabled={maxPages === pagination.page}
+          isDisabled={
+            maxPages === pagination.page || pagination.totalItems === 0
+          }
           onClick={() =>
             pagination.onChange({
               page: pagination.page + 1,
