@@ -1,9 +1,6 @@
 import { Link, useLocation, useParams } from "react-router-dom";
 import { useGetCharacter } from "../../hooks/useGetCharacter";
 import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
   Flex,
   SimpleGrid,
   Image,
@@ -52,7 +49,7 @@ export const Profile: React.FC = () => {
           lg: 2,
         }}
       >
-        <Stack id="profile_image" gridArea={"image"} gap={3}>
+        <Stack id="profile_image" gridArea="image" gap={3}>
           <Image
             src={data?.image}
             alt={`${data?.name}__image`}
@@ -65,6 +62,7 @@ export const Profile: React.FC = () => {
             <FaLocationDot />
             <Text>{data?.location.name}</Text>
           </Flex>
+
           <Text>{data?.origin.name}</Text>
           <Text>{data?.gender}</Text>
           <Text>{data?.status}</Text>
