@@ -34,6 +34,8 @@ declare namespace Cypress {
       name,
       requestId
     ): Chainable<void>;
+
+    interceptGetOneCharacter(CharacterData): Chainable<void>;
   }
 }
 
@@ -52,3 +54,16 @@ Cypress.Commands.add(
     ).as(requestId);
   }
 );
+
+Cypress.Commands.add("interceptGetOneCharacter", (CharacterData) => {
+  cy.intercept(
+    {
+      method: "GET",
+      url: `https://rickandmortyapi.com/api/character/1`,
+    },
+    {
+      statusCode: 200,
+      body: CharacterData,
+    }
+  ).as("character_1");
+});

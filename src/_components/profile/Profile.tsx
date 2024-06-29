@@ -30,14 +30,25 @@ export const Profile: React.FC = () => {
     <Flex flexDir="column" gap={2}>
       <Flex justifyContent="space-between">
         <Breadcrumb>
-          <BreadcrumbItem key={`breadcrumb__home`}>
-            <BreadcrumbLink href={`/`}>Home</BreadcrumbLink>
+          <BreadcrumbItem id="breadcrumb__home" key={`breadcrumb__home`}>
+            <BreadcrumbLink id="breadcrumb__home__link" href={`/`}>
+              Home
+            </BreadcrumbLink>
           </BreadcrumbItem>
           {location.pathname.split("/").map((item: string) => {
             if (item !== "") {
               return (
-                <BreadcrumbItem isCurrentPage key={`breadcrumb__${item}`}>
-                  <BreadcrumbLink href={`/${item}`}>{item}</BreadcrumbLink>
+                <BreadcrumbItem
+                  id={`breadcrumb__${item}`}
+                  isCurrentPage
+                  key={`breadcrumb__${item}`}
+                >
+                  <BreadcrumbLink
+                    key={`breadcrumb__${item}__link`}
+                    href={`/${item}`}
+                  >
+                    {item}
+                  </BreadcrumbLink>
                 </BreadcrumbItem>
               );
             }
