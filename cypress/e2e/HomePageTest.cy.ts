@@ -18,7 +18,7 @@ describe("Home page tests", () => {
       "",
       "all_characters"
     );
-    cy.visit("http://localhost:3000/");
+    cy.visit(Cypress.env("FRONTEND_ORIGIN"));
   });
 
   it("displays characters table", () => {

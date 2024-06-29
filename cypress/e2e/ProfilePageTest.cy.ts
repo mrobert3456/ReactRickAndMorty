@@ -17,7 +17,7 @@ describe("Profile page tests", () => {
 
   beforeEach("Load page", () => {
     cy.interceptGetOneCharacter(globalThis.character);
-    cy.visit("http://localhost:3000/profile/1");
+    cy.visit(`${Cypress.env("FRONTEND_ORIGIN")}/profile/1`);
   });
 
   it("clicking on the Back to Home page button redirects the user to the home page", () => {

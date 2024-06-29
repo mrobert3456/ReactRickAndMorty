@@ -45,7 +45,7 @@ Cypress.Commands.add(
     cy.intercept(
       {
         method: "GET",
-        url: `https://rickandmortyapi.com/api/character/?page=${page}&name=${name}`,
+        url: `${Cypress.env("API_URL")}/character/?page=${page}&name=${name}`,
       },
       {
         statusCode: 200,
@@ -59,7 +59,7 @@ Cypress.Commands.add("interceptGetOneCharacter", (CharacterData) => {
   cy.intercept(
     {
       method: "GET",
-      url: `https://rickandmortyapi.com/api/character/1`,
+      url: `${Cypress.env("API_URL")}/character/1`,
     },
     {
       statusCode: 200,
