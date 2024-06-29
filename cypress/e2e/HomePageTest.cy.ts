@@ -10,10 +10,17 @@ describe("Home page tests", () => {
       globalThis.characters = data;
     });
   });
+
   beforeEach("Load page", () => {
-    cy.interceptGetAllCharacters(globalThis.characters, 1, "");
+    cy.interceptGetAllCharacters(
+      globalThis.characters,
+      1,
+      "",
+      "all_characters"
+    );
     cy.visit("http://localhost:3000/");
   });
+
   it("displays characters table", () => {
     globalThis.homePage.getDataTable().should("be.visible");
   });
@@ -34,19 +41,88 @@ describe("Home page tests", () => {
         results: [globalThis.characters.results[0]],
       },
       1,
-      "Rick"
+      "Rick",
+      "all_characters"
     );
     globalThis.homePage.getDataTableSearchBar().then(($el) => {
       cy.wrap($el).type("Rick");
     });
 
     globalThis.homePage
-      .getCustomRowName(1)
+      .getCustomRowName(globalThis.characters.results[0].id)
       .invoke("text")
       .then((text) => {
-        expect(text).to.equal("Rick Sanchez");
+        expect(text).to.equal(globalThis.characters.results[0].name);
       });
   });
 
-  it("clicking on a character name will redirect the user to its profile page", () => {});
+  it("clicking on a character name will redirect the user to its profile page", () => {
+    globalThis.homePage
+      .getCustomRowName(globalThis.characters.results[0].id)
+      .click()
+      .then(() => {
+        cy.location().should((loc) => {
+          expect(loc.pathname).to.contain(
+            `profile/${globalThis.characters.results[0].id}`
+          );
+        });
+      });
+  });
+
+  it("clicking on the next page button gets the second page", () => {
+    cy.interceptGetAllCharacters(
+      {
+        info: globalThis.characters.info,
+        results: [globalThis.characters.results[2]],
+      },
+      2,
+      "",
+      "second_page"
+    );
+    globalThis.homePage.getNextPageButton().click();
+
+    cy.wait("@second_page").then((interception) => {
+      assert.deepEqual(
+        interception.response.body.results[0],
+        globalThis.characters.results[2]
+      );
+    });
+  });
+
+  it("next page button is disabled on the second page", () => {
+    cy.interceptGetAllCharacters(
+      {
+        info: globalThis.characters.info,
+        results: [globalThis.characters.results[2]],
+      },
+      2,
+      "",
+      "second_page"
+    );
+    globalThis.homePage.getNextPageButton().click();
+
+    globalThis.homePage.getNextPageButton().should("be.disabled");
+  });
+
+  it("previous page button is enabled on the second page", () => {
+    cy.interceptGetAllCharacters(
+      {
+        info: globalThis.characters.info,
+        results: [globalThis.characters.results[2]],
+      },
+      2,
+      "",
+      "second_page"
+    );
+    globalThis.homePage.getNextPageButton().click();
+
+    globalThis.homePage.getPrevPageButton().should("be.enabled");
+  });
+
+  it("previous page button is disabled on the first page", () => {
+    globalThis.homePage.getPrevPageButton().should("be.disabled");
+  });
+  it("next page button is enabled on the first page", () => {
+    globalThis.homePage.getNextPageButton().should("be.enabled");
+  });
 });

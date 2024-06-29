@@ -16,6 +16,7 @@ const Pagination: React.FC<Props> = ({ id, pagination }) => {
     <Center>
       <HStack>
         <IconButton
+          id="prev_page__button"
           icon={<MdKeyboardDoubleArrowLeft />}
           aria-label="Previous page"
           isDisabled={pagination.page === 1}
@@ -37,6 +38,7 @@ const Pagination: React.FC<Props> = ({ id, pagination }) => {
           </Box>
         </HStack>
         <IconButton
+          id="next_page__button"
           icon={<MdKeyboardDoubleArrowRight />}
           aria-label="Next page"
           isDisabled={maxPages === pagination.page}

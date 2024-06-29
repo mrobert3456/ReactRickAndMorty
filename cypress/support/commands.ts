@@ -28,13 +28,18 @@
 
 declare namespace Cypress {
   interface Chainable {
-    interceptGetAllCharacters(CharactersData, page, name): Chainable<void>;
+    interceptGetAllCharacters(
+      CharactersData,
+      page,
+      name,
+      requestId
+    ): Chainable<void>;
   }
 }
 
 Cypress.Commands.add(
   "interceptGetAllCharacters",
-  (CharactersData, page, name) => {
+  (CharactersData, page, name, requestId) => {
     cy.intercept(
       {
         method: "GET",
@@ -44,6 +49,6 @@ Cypress.Commands.add(
         statusCode: 200,
         body: CharactersData,
       }
-    ).as("all_characters");
+    ).as(requestId);
   }
 );

@@ -8,7 +8,15 @@ class HomePage {
   }
 
   getCustomRowName(rowId: number) {
-    return cy.get(`#row${rowId}-cell_1_name`);
+    return cy.get(`#row${rowId}-cell_1_name > a`);
+  }
+
+  getNextPageButton() {
+    return cy.get("#next_page__button");
+  }
+
+  getPrevPageButton() {
+    return cy.get("#prev_page__button");
   }
 }
 
