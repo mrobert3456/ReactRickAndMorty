@@ -68,7 +68,9 @@ const DataTable = <T extends { id?: number }>({
               size="lg"
             />
           )}
-          {isFetching && <Spinner />}
+          {isFetching && (
+            <Spinner position="absolute" alignSelf="center" right={10} />
+          )}
         </Flex>
       </Box>
       <Table id="table" w="100%" variant="striped">

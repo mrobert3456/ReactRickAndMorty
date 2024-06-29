@@ -15,6 +15,7 @@ const CharactersList: React.FC = () => {
 
   const filterNames: React.ChangeEventHandler<HTMLInputElement> = (event) => {
     characterFilterDispatch({ type: "SET_NAME", payload: event.target.value });
+    pagination.onChange({ page: 1, pageSize: pagination.pageSize });
   };
 
   return (
@@ -30,6 +31,7 @@ const CharactersList: React.FC = () => {
         totalItems: data?.info.count || 0,
       }}
       error={error}
+      searchText={filter.name}
     />
   );
 };
