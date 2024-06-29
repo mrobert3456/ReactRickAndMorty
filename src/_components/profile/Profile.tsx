@@ -16,6 +16,7 @@ import {
 } from "@chakra-ui/react";
 import { FaLocationDot } from "react-icons/fa6";
 import { useGetEpisodes } from "../../hooks/useGetEpisodes";
+import CustomBreadcrumb from "../layout/CustomBreadcrumb";
 
 export const Profile: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -29,31 +30,10 @@ export const Profile: React.FC = () => {
   return (
     <Flex flexDir="column" gap={2}>
       <Flex justifyContent="space-between">
-        <Breadcrumb>
-          <BreadcrumbItem id="breadcrumb__home" key={`breadcrumb__home`}>
-            <BreadcrumbLink id="breadcrumb__home__link" href={`/`}>
-              Home
-            </BreadcrumbLink>
-          </BreadcrumbItem>
-          {location.pathname.split("/").map((item: string) => {
-            if (item !== "") {
-              return (
-                <BreadcrumbItem
-                  id={`breadcrumb__${item}`}
-                  isCurrentPage
-                  key={`breadcrumb__${item}`}
-                >
-                  <BreadcrumbLink
-                    key={`breadcrumb__${item}__link`}
-                    href={`/${item}`}
-                  >
-                    {item}
-                  </BreadcrumbLink>
-                </BreadcrumbItem>
-              );
-            }
-          })}
-        </Breadcrumb>
+        <CustomBreadcrumb
+          paths={["Home", ...location.pathname.split("/")]}
+          currentLocation={location.pathname}
+        />
         <Button id="back_navigation__button" as={Link} to="/">
           Back to Home page
         </Button>

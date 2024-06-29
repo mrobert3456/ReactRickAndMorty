@@ -4,7 +4,7 @@ class ProfilePage {
   }
 
   getHomeBreadcrumbLink() {
-    return cy.get("#breadcrumb__home__link");
+    return cy.get("#breadcrumb__Home__link");
   }
 }
 
