@@ -26,6 +26,7 @@ interface DataTableProps<T> {
   searchText?: string;
   id?: string;
   filterRows?: React.ChangeEventHandler<HTMLInputElement>;
+  filterPlaceholder?: string;
 }
 
 const DataTable = <T extends { id?: number }>({
@@ -38,6 +39,7 @@ const DataTable = <T extends { id?: number }>({
   searchText,
   id,
   filterRows,
+  filterPlaceholder,
 }: PropsWithChildren<DataTableProps<T>>) => {
   if (isLoading) return <DataTableSkeleton />;
 
@@ -66,6 +68,7 @@ const DataTable = <T extends { id?: number }>({
               onChange={filterRows}
               value={searchText}
               size="lg"
+              placeholder={filterPlaceholder}
             />
           )}
           {isFetching && (

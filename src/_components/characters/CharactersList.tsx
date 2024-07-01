@@ -32,6 +32,7 @@ const CharactersList: React.FC = () => {
       }}
       error={error}
       searchText={filter.name}
+      filterPlaceholder="Search for character names..."
     />
   );
 };
