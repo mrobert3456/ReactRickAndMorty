@@ -10,6 +10,7 @@ import {
   Th,
   Thead,
   Tr,
+  Text,
 } from "@chakra-ui/react";
 import DataTableSkeleton from "./DatatableSkeleton";
 import Search from "../Search/Search";
@@ -99,7 +100,7 @@ const DataTable = <T extends { id?: number }>({
                 key={"row-cell-no-data"}
                 colSpan={headers.length}
               >
-                <Box>Query returned no results</Box>
+                <Text textAlign="center">Query returned no results</Text>
               </Td>
             </Tr>
           )}
