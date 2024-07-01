@@ -24,7 +24,7 @@ import { Episode } from "./profilData";
 export const Profile: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const location = useLocation();
-  const { data, isLoading, error } = useGetCharacter(id ? +id : 1);
+  const { data, isLoading, isError, error } = useGetCharacter(id ? +id : 1);
   const [episodeIds, setEpisodeIds] = useState<number[] | null>(null);
   const { data: episodes, isLoading: isEpisodesLoading } = useGetEpisodes(
     episodeIds || [],
@@ -40,6 +40,20 @@ export const Profile: React.FC = () => {
     }
   }, [data]);
 
+  if (isError) {
+    return (
+      <Flex
+        id="notfound"
+        justifyContent="center"
+        margin="auto"
+        backgroundColor="red"
+        color="white"
+        width="50%"
+      >
+        Error: {error.message}
+      </Flex>
+    );
+  }
   return (
     <Flex flexDir="column" gap={2}>
       <Flex justifyContent="space-between">
@@ -108,7 +122,7 @@ export const Profile: React.FC = () => {
 
           <SkeletonFlex isLoaded={!isLoading}>
             <Text>Type:</Text>
-            <Text>{data?.type ? data.type : "-"}</Text>
+            <Text>{data?.type ? data?.type : "-"}</Text>
           </SkeletonFlex>
         </Stack>
 
