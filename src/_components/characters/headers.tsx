@@ -1,7 +1,7 @@
 import { Header } from "../datatable/table";
-import { Image } from "@chakra-ui/react";
+import { Image, Link } from "@chakra-ui/react";
 import { Character } from "./characters";
-import { Link } from "react-router-dom";
+import { Link as RouterLink } from "react-router-dom";
 export const Headers: Header<Character>[] = [
   {
     key: "avatar",
@@ -19,7 +19,9 @@ export const Headers: Header<Character>[] = [
     key: "name",
     header: "Name",
     render: (item: Character) => (
-      <Link to={`profile/${item.id}`}>{item.name}</Link>
+      <Link as={RouterLink} color="blue.500" to={`profile/${item.id}`}>
+        {item.name}
+      </Link>
     ),
   },
   {
