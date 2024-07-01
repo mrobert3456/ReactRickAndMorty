@@ -10,10 +10,12 @@ import {
   UnorderedList,
   ListItem,
   Button,
+  Skeleton,
 } from "@chakra-ui/react";
 import { FaLocationDot } from "react-icons/fa6";
-import { useGetEpisodes } from "../../hooks/useGetEpisodes";
+/* import { useGetEpisodes } from "../../hooks/useGetEpisodes"; */
 import CustomBreadcrumb from "../layout/CustomBreadcrumb";
+import SkeletonFlex from "../ui/SkeletonFlex";
 
 export const Profile: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -27,13 +29,17 @@ export const Profile: React.FC = () => {
   return (
     <Flex flexDir="column" gap={2}>
       <Flex justifyContent="space-between">
-        <CustomBreadcrumb
-          paths={["Home", ...location.pathname.split("/")]}
-          currentLocation={location.pathname}
-        />
-        <Button id="back_navigation__button" as={Link} to="/">
-          Back to Home page
-        </Button>
+        <Skeleton isLoaded={!isLoading}>
+          <CustomBreadcrumb
+            paths={["Home", ...location.pathname.split("/")]}
+            currentLocation={location.pathname}
+          />
+        </Skeleton>
+        <Skeleton isLoaded={!isLoading}>
+          <Button id="back_navigation__button" as={Link} to="/">
+            Back to Home page
+          </Button>
+        </Skeleton>
       </Flex>
       <SimpleGrid
         templateAreas={{
@@ -50,45 +56,71 @@ export const Profile: React.FC = () => {
         }}
       >
         <Stack id="profile_image" gridArea="image" gap={3}>
-          <Image
-            src={data?.image}
-            alt={`${data?.name}__image`}
-            boxSize="150px"
-            objectFit="cover"
-          />
+          <Skeleton boxSize="150px" isLoaded={!isLoading}>
+            <Image
+              src={data?.image}
+              alt={`${data?.name}__image`}
+              boxSize="150px"
+              objectFit="cover"
+            />
+          </Skeleton>
 
           <Divider />
-          <Flex gap={2} alignItems="center">
+
+          <SkeletonFlex isLoaded={!isLoading} alignItems="center">
             <FaLocationDot />
             <Text>{data?.location.name}</Text>
-          </Flex>
+          </SkeletonFlex>
 
-          <Text>{data?.origin.name}</Text>
-          <Text>{data?.gender}</Text>
-          <Text>{data?.status}</Text>
-          <Text>{data?.species}</Text>
+          <SkeletonFlex isLoaded={!isLoading} as={Flex} gap={2} flexDir="row">
+            <Text>Origin:</Text>
+            <Text>{data?.origin.name}</Text>
+          </SkeletonFlex>
 
-          <Text>{data?.type}</Text>
+          <SkeletonFlex isLoaded={!isLoading}>
+            <Text>Gender:</Text>
+            <Text>{data?.gender}</Text>
+          </SkeletonFlex>
+
+          <SkeletonFlex isLoaded={!isLoading}>
+            <Text>Status:</Text>
+            <Text>{data?.status}</Text>
+          </SkeletonFlex>
+
+          <SkeletonFlex isLoaded={!isLoading}>
+            <Text>Species:</Text>
+            <Text>{data?.species}</Text>
+          </SkeletonFlex>
+
+          <SkeletonFlex isLoaded={!isLoading}>
+            <Text>Type:</Text>
+            <Text>{data?.type ? data.type : "-"}</Text>
+          </SkeletonFlex>
         </Stack>
 
         <Stack id="profile_info" gridArea="info">
-          <Text fontSize="4xl" as="h1">
-            {data?.name}
-          </Text>
+          <SkeletonFlex isLoaded={!isLoading}>
+            <Text fontSize="4xl" as="h1">
+              {data?.name}
+            </Text>
+          </SkeletonFlex>
 
           <Stack gap={2}>
-            <Text>Episodes:</Text>
-            <UnorderedList>
-              {data?.episode.map((url: string, index: number) => (
-                <ListItem
-                  listStyleType="none"
-                  id={`item_${index}`}
-                  key={`item_${index}`}
-                >
-                  <Text>{url}</Text>
-                </ListItem>
-              ))}
-            </UnorderedList>
+            <SkeletonFlex isLoaded={!isLoading} flexDir="column">
+              <Text>Episodes:</Text>
+              <Flex flexWrap="wrap" as={UnorderedList}>
+                {data?.episode.map((url: string, index: number) => (
+                  <ListItem
+                    listStyleType="none"
+                    id={`item_${index}`}
+                    key={`item_${index}`}
+                    maxW="20rem"
+                  >
+                    <Text>{url}</Text>
+                  </ListItem>
+                ))}
+              </Flex>
+            </SkeletonFlex>
           </Stack>
         </Stack>
       </SimpleGrid>
