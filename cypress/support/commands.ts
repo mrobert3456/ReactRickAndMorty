@@ -36,6 +36,7 @@ declare namespace Cypress {
     ): Chainable<void>;
 
     interceptGetOneCharacter(CharacterData): Chainable<void>;
+    interceptGetOneEpisode(EpisodeData): Chainable<void>;
   }
 }
 
@@ -59,11 +60,24 @@ Cypress.Commands.add("interceptGetOneCharacter", (CharacterData) => {
   cy.intercept(
     {
       method: "GET",
-      url: `${Cypress.env("API_URL")}/character/1`,
+      url: `${Cypress.env("API_URL")}/character/${CharacterData.id}`,
     },
     {
       statusCode: 200,
       body: CharacterData,
     }
-  ).as("character_1");
+  ).as(`character_${CharacterData.id}`);
+});
+
+Cypress.Commands.add("interceptGetOneEpisode", (EpisodeData) => {
+  cy.intercept(
+    {
+      method: "GET",
+      url: `${Cypress.env("API_URL")}/episode/${EpisodeData.id}`,
+    },
+    {
+      statusCode: 200,
+      body: EpisodeData,
+    }
+  ).as(`episode_${EpisodeData.id}`);
 });

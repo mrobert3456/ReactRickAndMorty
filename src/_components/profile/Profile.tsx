@@ -11,20 +11,34 @@ import {
   ListItem,
   Button,
   Skeleton,
+  Tooltip,
 } from "@chakra-ui/react";
 import { FaLocationDot } from "react-icons/fa6";
-/* import { useGetEpisodes } from "../../hooks/useGetEpisodes"; */
+import { useGetEpisodes } from "../../hooks/useGetEpisodes";
 import CustomBreadcrumb from "../layout/CustomBreadcrumb";
 import SkeletonFlex from "../ui/SkeletonFlex";
+import { useEffect, useState } from "react";
+import { getEpisodeNumberIdFromUrl } from "../utils/episodeUtils";
+import { Episode } from "./profilData";
 
 export const Profile: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const location = useLocation();
   const { data, isLoading, error } = useGetCharacter(id ? +id : 1);
-  /*  const { data: episodes, isLoading: isEpisodesLoading } = useGetEpisodes(
-    data?.episode.map((url: string) => +url.split("episode/")[1]),
-    
-  ); */
+  const [episodeIds, setEpisodeIds] = useState<number[] | null>(null);
+  const { data: episodes, isLoading: isEpisodesLoading } = useGetEpisodes(
+    episodeIds || [],
+    !!episodeIds
+  );
+
+  useEffect(() => {
+    if (data) {
+      const episodeIds = data.episode.map((url: string) => {
+        return getEpisodeNumberIdFromUrl(url);
+      });
+      setEpisodeIds(episodeIds);
+    }
+  }, [data]);
 
   return (
     <Flex flexDir="column" gap={2}>
@@ -106,17 +120,23 @@ export const Profile: React.FC = () => {
           </SkeletonFlex>
 
           <Stack gap={2}>
-            <SkeletonFlex isLoaded={!isLoading} flexDir="column">
+            <SkeletonFlex isLoaded={!isEpisodesLoading} flexDir="column">
               <Text>Episodes:</Text>
               <Flex flexWrap="wrap" as={UnorderedList}>
-                {data?.episode.map((url: string, index: number) => (
+                {episodes?.map((episode: Episode, index: number) => (
                   <ListItem
                     listStyleType="none"
-                    id={`item_${index}`}
-                    key={`item_${index}`}
+                    id={`episode_${index}__item`}
+                    key={`episode_${index}__item`}
                     maxW="20rem"
+                    w="20rem"
+                    padding={2}
                   >
-                    <Text>{url}</Text>
+                    <Tooltip id={`${episode.id}_episode`} label={episode.name}>
+                      <Text isTruncated>
+                        {episode.episode} : {episode.name}
+                      </Text>
+                    </Tooltip>
                   </ListItem>
                 ))}
               </Flex>
