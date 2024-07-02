@@ -6,13 +6,16 @@ interface Location {
   name: string;
   url: string;
 }
+type Gender = "Male" | "Female" | "Genderless" | "unknown";
+type Status = "Dead" | "Alive" | "unknown";
+
 export interface Character {
   id: number;
   name: string;
-  status: string;
+  status: Status;
   species: string;
   type: string;
-  gender: "Male" | "Female";
+  gender: Gender;
   origin: Origin;
   location: Location;
   image: string;
