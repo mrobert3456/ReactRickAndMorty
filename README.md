@@ -34,6 +34,20 @@ To start the development server run:
 To run the application with nginx run:
 `docker compose up`
 
+To deploy the application with `minikube` run the following commands:
+
+```
+kubectl apply -f deploy/app-config.yaml
+kubectl apply -f deploy/deployment.yaml
+kubectl apply -f deploy/service.yaml
+
+minikube service app-service
+```
+
+or run `./deploy/deploy_app.sh`
+
+[Minikube](https://minikube.sigs.k8s.io/docs/) - local Kubernetes cluster
+
 ## ⚡ Running tests
 
 To run the e2e test in headless mode, start the application and then run:

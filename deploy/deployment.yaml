@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ram-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ram-frontend
+  template:
+    metadata:
+      labels:
+        app: ram-frontend
+    spec:
+      containers:
+        - name: ram-frontend-app
+          image: mrobert3456/ram_app:latest
+          ports:
+            - containerPort: 80
+          env:
+            - name: REACT_APP_API_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: app-config
+                  key: api-url
