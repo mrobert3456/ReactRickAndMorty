@@ -11,6 +11,8 @@ import {
   Thead,
   Tr,
   Text,
+  Heading,
+  Stack,
 } from "@chakra-ui/react";
 import DataTableSkeleton from "./DatatableSkeleton";
 import Search from "../Search/Search";
@@ -18,6 +20,8 @@ import Pagination from "./Pagination";
 import { AxiosError } from "axios";
 
 interface DataTableProps<T> {
+  title: string;
+  description: string;
   headers: Header<T>[];
   list: T[];
   error?: AxiosError | null;
@@ -31,6 +35,8 @@ interface DataTableProps<T> {
 }
 
 const DataTable = <T extends { id?: number }>({
+  title,
+  description,
   headers,
   list,
   error,
@@ -61,6 +67,14 @@ const DataTable = <T extends { id?: number }>({
 
   return (
     <Box id={id}>
+      <Stack gap={2} pb="1rem">
+        <Heading id={`table-title__${title}`} as="h3" size="md">
+          Characters
+        </Heading>
+        <Heading id={`table-description__${title}`} as="h4" size="xs">
+          You can see and search all characters from Rick and Morty
+        </Heading>
+      </Stack>
       <Box id="table__toolbar">
         <Flex justifyContent="flex-end">
           {filterRows && (

@@ -20,6 +20,8 @@ const CharactersList: React.FC = () => {
 
   return (
     <DataTable<Character>
+      title="Characters"
+      description="You can see and search all characters from Rick and Morty"
       id="charachters_table"
       headers={Headers}
       list={data?.list || []}
