@@ -31,7 +31,7 @@ Install dependecies running:
 To start the development server run:
 `npm start`
 
-To run the application with nginx run:
+To run the application with nginx on `localhost:8080` run:
 `docker compose up`
 
 To deploy the application with `minikube` run the following commands:
