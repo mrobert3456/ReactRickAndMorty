@@ -22,7 +22,7 @@ cd ReactRickAndMorty
 Create a `.env.developlment` and `.env.production` file in the project's root folder with the following structure:
 
 ```
-REACT_APP_API_URL=
+REACT_APP_API_URL= {should be the `REST base url` described in the documentation above}
 ```
 
 Install dependecies running:
