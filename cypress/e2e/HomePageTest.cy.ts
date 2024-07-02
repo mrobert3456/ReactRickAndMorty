@@ -1,10 +1,12 @@
 /// <reference types="Cypress"/>
 
 import HomePage from "./pageObjects/HomePage";
+import NotFound from "./pageObjects/NotFound";
 
 describe("Home page tests", () => {
   before("Init test", () => {
     globalThis.homePage = new HomePage();
+    globalThis.notFound = new NotFound();
 
     cy.fixture("characters.json").then((data) => {
       globalThis.characters = data;
@@ -122,7 +124,14 @@ describe("Home page tests", () => {
   it("previous page button is disabled on the first page", () => {
     globalThis.homePage.getPrevPageButton().should("be.disabled");
   });
+
   it("next page button is enabled on the first page", () => {
     globalThis.homePage.getNextPageButton().should("be.enabled");
+  });
+
+  it("navigating to a unknown page displays notfound component", () => {
+    cy.visit(Cypress.env("FRONTEND_ORIGIN") + "/somepage").then(() => {
+      globalThis.notFound.getNotFound().should("exist");
+    });
   });
 });
