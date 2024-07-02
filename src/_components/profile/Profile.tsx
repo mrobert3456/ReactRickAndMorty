@@ -59,7 +59,7 @@ export const Profile: React.FC = () => {
       <Flex justifyContent="space-between">
         <Skeleton isLoaded={!isLoading}>
           <CustomBreadcrumb
-            paths={["Home", ...location.pathname.split("/")]}
+            paths={location.pathname.split("/")}
             currentLocation={location.pathname}
           />
         </Skeleton>
@@ -133,29 +133,30 @@ export const Profile: React.FC = () => {
             </Text>
           </SkeletonFlex>
 
-          <Stack gap={2}>
-            <SkeletonFlex isLoaded={!isEpisodesLoading} flexDir="column">
-              <Text>Episodes:</Text>
-              <Flex flexWrap="wrap" as={UnorderedList}>
-                {episodes?.map((episode: Episode, index: number) => (
-                  <ListItem
-                    listStyleType="none"
-                    id={`episode_${index}__item`}
-                    key={`episode_${index}__item`}
-                    maxW="20rem"
-                    w="20rem"
-                    padding={2}
-                  >
-                    <Tooltip id={`${episode.id}_episode`} label={episode.name}>
-                      <Text isTruncated>
-                        {episode.episode} : {episode.name}
-                      </Text>
-                    </Tooltip>
-                  </ListItem>
-                ))}
-              </Flex>
-            </SkeletonFlex>
-          </Stack>
+          <SkeletonFlex
+            isLoaded={!isEpisodesLoading && !isLoading}
+            flexDir="column"
+          >
+            <Text>Episodes:</Text>
+            <Flex flexWrap="wrap" as={UnorderedList}>
+              {episodes?.map((episode: Episode, index: number) => (
+                <ListItem
+                  listStyleType="none"
+                  id={`episode_${index}__item`}
+                  key={`episode_${index}__item`}
+                  maxW="20rem"
+                  w="20rem"
+                  padding={2}
+                >
+                  <Tooltip id={`${episode.id}_episode`} label={episode.name}>
+                    <Text isTruncated>
+                      {episode.episode} : {episode.name}
+                    </Text>
+                  </Tooltip>
+                </ListItem>
+              ))}
+            </Flex>
+          </SkeletonFlex>
         </Stack>
       </SimpleGrid>
     </Flex>
