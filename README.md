@@ -34,8 +34,15 @@ To start the development server run:
 To run the application with nginx run:
 `docker compose up`
 
+## ⚡ Running E2E tests
+
+To run the e2e test in headless mode, start the application and then run:
+`npx cypress run`
+
 ## Resources
 
 [Chakra UI](https://v2.chakra-ui.com/) - Chakra UI is a simple, modular and accessible component library that gives you the building blocks you need to build your React applications
 
 [Rick and Morty API](https://rickandmortyapi.com/documentation/) - API for getting the episodes, characters and locations from the Rick and Morty TV show
+
+[Cypress](https://www.cypress.io/) - easily create tests for your modern web applications, debug them visually, and automatically run them in your continuous integration builds.
