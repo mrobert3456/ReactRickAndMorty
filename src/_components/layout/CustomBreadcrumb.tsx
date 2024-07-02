@@ -30,7 +30,13 @@ const CustomBreadcrumb: React.FC<Props> = ({
                 id={`breadcrumb__${item}__link`}
                 as={Link}
                 key={`breadcrumb__${item}__link`}
-                to={item === "Home" ? "/" : `/${item}`}
+                to={
+                  item === "Home"
+                    ? "/"
+                    : currentLocation.includes(item)
+                    ? ""
+                    : `/${item}`
+                }
               >
                 {item}
               </BreadcrumbLink>
