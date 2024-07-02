@@ -26,10 +26,12 @@ export const Profile: React.FC = () => {
   const location = useLocation();
   const { data, isLoading, isError, error } = useGetCharacter(id ? +id : 1);
   const [episodeIds, setEpisodeIds] = useState<number[] | null>(null);
-  const { data: episodes, isLoading: isEpisodesLoading } = useGetEpisodes(
-    episodeIds || [],
-    !!episodeIds
-  );
+  const {
+    data: episodes,
+    isLoading: isEpisodesLoading,
+    isError: isEpisodeError,
+    error: episodeError,
+  } = useGetEpisodes(episodeIds || [], !!episodeIds);
 
   useEffect(() => {
     if (data) {
@@ -40,17 +42,17 @@ export const Profile: React.FC = () => {
     }
   }, [data]);
 
-  if (isError) {
+  if (isError || isEpisodeError) {
     return (
       <Flex
-        id="notfound"
+        id={`error_${error?.code || episodeError?.code}`}
         justifyContent="center"
         margin="auto"
         backgroundColor="red"
         color="white"
         width="50%"
       >
-        Error: {error.message}
+        Error: {error?.message || episodeError?.message}
       </Flex>
     );
   }
