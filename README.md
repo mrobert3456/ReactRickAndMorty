@@ -34,10 +34,13 @@ To start the development server run:
 To run the application with nginx run:
 `docker compose up`
 
-## ⚡ Running E2E tests
+## ⚡ Running tests
 
 To run the e2e test in headless mode, start the application and then run:
 `npx cypress run`
+
+To run the unit test run:
+`npm test`
 
 ## Resources
 
@@ -46,3 +49,5 @@ To run the e2e test in headless mode, start the application and then run:
 [Rick and Morty API](https://rickandmortyapi.com/documentation/) - API for getting the episodes, characters and locations from the Rick and Morty TV show
 
 [Cypress](https://www.cypress.io/) - easily create tests for your modern web applications, debug them visually, and automatically run them in your continuous integration builds.
+
+[Jest](https://jestjs.io/) - Jest is a delightful JavaScript Testing Framework with a focus on simplicity
