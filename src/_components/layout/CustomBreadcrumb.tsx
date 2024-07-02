@@ -19,18 +19,19 @@ const CustomBreadcrumb: React.FC<Props> = ({
   return (
     <Breadcrumb {...restProps}>
       {paths.map((item: string) => {
+        const label = item === "" ? "Home" : item;
         return (
           <BreadcrumbItem
-            id={`breadcrumb__${item}`}
+            id={`breadcrumb__${label}`}
             isCurrentPage={currentLocation.includes(item) && item !== ""}
-            key={`breadcrumb__${item}`}
+            key={`breadcrumb__${label}`}
           >
             <BreadcrumbLink
-              id={`breadcrumb__${item}__link`}
+              id={`breadcrumb__${label}__link`}
               as={Link}
-              key={`breadcrumb__${item}__link`}
+              key={`breadcrumb__${label}__link`}
               to={
-                item === ""
+                label === "Home"
                   ? "/"
                   : currentLocation.includes(item)
                   ? ""
