@@ -72,7 +72,7 @@ const DataTable = <T extends { id?: number }>({
           Characters
         </Heading>
         <Heading id={`table-description__${title}`} as="h4" size="xs">
-          You can see and search all characters from Rick and Morty
+          {description}
         </Heading>
       </Stack>
       <Box id="table__toolbar">
