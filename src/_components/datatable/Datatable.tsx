@@ -42,7 +42,7 @@ const DataTable = <T extends { id?: number }>({
   filterRows,
   filterPlaceholder,
 }: PropsWithChildren<DataTableProps<T>>) => {
-  if (isLoading && searchText !== "") return <DataTableSkeleton />;
+  if (isLoading && searchText === "") return <DataTableSkeleton />;
 
   const renderRow = (row: T, headers: Header<T>[]) => {
     return (
