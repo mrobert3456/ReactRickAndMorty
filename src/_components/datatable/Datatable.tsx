@@ -42,9 +42,9 @@ const DataTable = <T extends { id?: number }>({
   filterRows,
   filterPlaceholder,
 }: PropsWithChildren<DataTableProps<T>>) => {
-  if (isLoading) return <DataTableSkeleton />;
+  if (isLoading && searchText !== "") return <DataTableSkeleton />;
 
-  const renderRow = (row: T, headers: Header<T>[], index: number) => {
+  const renderRow = (row: T, headers: Header<T>[]) => {
     return (
       <Tr id={`row__${row.id}`} key={`row__${row.id}`}>
         {headers.map((header: Header<T>, index: number) => (
@@ -92,7 +92,7 @@ const DataTable = <T extends { id?: number }>({
 
         <Tbody id="table__body">
           {list.length > 0 && !error ? (
-            list.map((row: T, index: number) => renderRow(row, headers, index))
+            list.map((row: T) => renderRow(row, headers))
           ) : (
             <Tr id="row-no-data" key="row-no-data">
               <Td
