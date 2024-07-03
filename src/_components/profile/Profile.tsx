@@ -16,7 +16,7 @@ import {
 import { FaLocationDot } from "react-icons/fa6";
 import { useGetEpisodes } from "../../hooks/useGetEpisodes";
 import CustomBreadcrumb from "../layout/CustomBreadcrumb";
-import SkeletonFlex from "../ui/SkeletonFlex";
+import SkeletonFlex from "../UI/SkeletonFlex";
 import { useEffect, useState } from "react";
 import { getEpisodeNumberIdFromUrl } from "../utils/episodeUtils";
 import { Episode } from "./profilData";
