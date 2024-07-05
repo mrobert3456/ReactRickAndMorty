@@ -14,11 +14,11 @@ spec:
     spec:
       containers:
         - name: ram-frontend-app
-          image: mrobert3456/ram_app:latest
+          image: mrobert3456/ram_app:vite
           ports:
             - containerPort: 80
           env:
-            - name: REACT_APP_API_URL
+            - name: VITE_API_URL
               valueFrom:
                 configMapKeyRef:
                   name: app-config

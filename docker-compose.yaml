@@ -3,6 +3,6 @@ services:
   myapp:
     build: .
     environment:
-      - REACT_APP_API_URL=https://rickandmortyapi.com/api
+      - VITE_API_URL=https://rickandmortyapi.com/api
     ports:
       - "8080:80"
