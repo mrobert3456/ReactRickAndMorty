@@ -1,8 +1,5 @@
 FROM node:20 as build
 
-ARG REACT_APP_API_ORIGIN
-ENV REACT_APP_API_ORIGIN=${REACT_APP_API_ORIGIN}
-
 WORKDIR /app
 
 COPY package*.json ./
