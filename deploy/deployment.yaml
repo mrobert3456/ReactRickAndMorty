@@ -14,12 +14,6 @@ spec:
     spec:
       containers:
         - name: ram-frontend-app
-          image: mrobert3456/ram_app:vite
+          image: mrobert3456/ram_app:vite_v2
           ports:
             - containerPort: 80
-          env:
-            - name: VITE_API_URL
-              valueFrom:
-                configMapKeyRef:
-                  name: app-config
-                  key: api-url
