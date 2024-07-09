@@ -1,5 +1,5 @@
 import { getEpisodeNumberIdFromUrl } from "../_components/utils/episodeUtils";
-import { describe, expect } from "@jest/globals";
+import { describe, it, expect } from "vitest";
 describe("getEpisodeNumberIdFromUrl tests", () => {
   it("return the number from the end of the URL", () => {
     const result = getEpisodeNumberIdFromUrl("http://test.com/episode/123");

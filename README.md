@@ -19,17 +19,17 @@ cd ReactRickAndMorty
 
 - [Node.js](https://nodejs.org/en)
 
-Create a `.env.developlment` and `.env.production` file in the project's root folder with the following structure:
+Create a `.env.developlment` file in the project's root folder with the following structure:
 
 ```
-REACT_APP_API_URL= {should be the `REST base url` described in the documentation above}
+VITE_API_URL= {should be the `REST base url` described in the documentation above}
 ```
 
 Install dependecies running:
 `npm install`
 
 To start the development server run:
-`npm start`
+`npm run dev`
 
 To run the application with nginx on `localhost:8080` run:
 `docker compose up`
@@ -64,4 +64,4 @@ To run the unit test run:
 
 [Cypress](https://www.cypress.io/) - easily create tests for your modern web applications, debug them visually, and automatically run them in your continuous integration builds.
 
-[Jest](https://jestjs.io/) - Jest is a delightful JavaScript Testing Framework with a focus on simplicity
+[Vitest](https://vitest.dev/) - A Vite-native testing framework. It's fast!

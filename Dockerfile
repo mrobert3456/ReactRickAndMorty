@@ -1,7 +1,7 @@
 FROM node:20 as build
 
-ARG REACT_APP_API_ORIGIN
-ENV REACT_APP_API_ORIGIN=${REACT_APP_API_ORIGIN}
+ARG VITE_API_URL
+ENV VITE_API_URL=${VITE_API_URL}
 
 WORKDIR /app
 
@@ -17,7 +17,7 @@ FROM nginx:alpine
 
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
-COPY --from=build /app/build /usr/share/nginx/html
+COPY --from=build /app/dist /usr/share/nginx/html
 
 EXPOSE 80
 

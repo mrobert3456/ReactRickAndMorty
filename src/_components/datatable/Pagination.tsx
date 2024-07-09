@@ -13,7 +13,7 @@ const Pagination: React.FC<Props> = ({ id, pagination }) => {
   const maxPages = Math.ceil(pagination.totalItems / pagination.pageSize);
 
   return (
-    <Center>
+    <Center id={id}>
       <HStack>
         <IconButton
           id="prev_page__button"

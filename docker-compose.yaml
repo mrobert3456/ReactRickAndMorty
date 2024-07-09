@@ -1,6 +1,9 @@
 version: "3"
 services:
   myapp:
-    build: .
+    build:
+      context: .
+      args:
+        - VITE_API_URL=https://rickandmortyapi.com/api
     ports:
       - "8080:80"
