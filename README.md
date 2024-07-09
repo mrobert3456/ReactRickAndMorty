@@ -37,7 +37,6 @@ To run the application with nginx on `localhost:8080` run:
 To deploy the application with `minikube` run the following commands:
 
 ```
-kubectl apply -f deploy/app-config.yaml
 kubectl apply -f deploy/deployment.yaml
 kubectl apply -f deploy/service.yaml
 
